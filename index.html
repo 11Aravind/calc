@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        :root {
+            --black: black;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+
+        #container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: var(--black);
+            color: var(--white);
+
+        }
+
+        #calculator {
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+            /* border: 1px solid black; */
+            /* padding: 31px; */
+            padding: 29px 14px;
+            /* background-color: rgb(184, 189, 184); */
+            border-radius: 9px;
+            display: grid;
+            grid-template-columns: repeat(4, 70px);
+        }
+
+        input {
+            border-radius: 5px;
+            margin-bottom: 31px;
+            border: none;
+            box-shadow: inset rgb(149 157 165 / 20%) 0px 1px 8px 0px;
+            grid-column: span 4;
+            height: 50px;
+            outline: none;
+            font-size: 30px;
+            text-align: end;
+        }
+
+        button {
+            border-radius: 4px;
+            box-shadow: inset rgb(0 0 0 / 10%) 0px 1px 2px 0px;
+            background-color: white;
+            border: none;
+            padding: 7px;
+            background-color: var(--black);
+            margin: 7px;
+            color: var(--white);
+        }
+
+        .special {
+            color: orange;
+            font-size: larger;
+        }
+
+        #cal {
+            background-color: orange;
+            border-radius: 50%;
+        }
+
+        #darkWhite {
+            float: right;
+        }
+
+        #off {
+            display: none;
+        }
+        .calcName{
+            width: 100%;
+            float: right;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <!-- <button id="darkWhite">DW</button> -->
+    <div class="mode">
+        <i class="fa fa-toggle-on" id="on" aria-hidden="true"></i>
+        <i class="fa fa-toggle-off" id="off" aria-hidden="true"></i>
+        MODE
+    </div>
+    <div id="container">
+
+        <div id="calculator">
+            <h4 class="calcName special">AsCalc</h4>
+            <input type="text" id="screen">
+            <button id="clear" class="special">C</button>
+            <button onclick="backOneDigit()" class="special">B
+            </button>
+            <button onclick="onscreen('%')" class="special">%</button>
+            <button onclick="onscreen('/')" class="special">/</button>
+            <button onclick="onscreen(7)" class="num">7</button>
+            <button onclick="onscreen(8)" class="num">8</button>
+            <button onclick="onscreen(9)" class="num">9</button>
+            <button onclick="onscreen('*')" class="special">x</button>
+            <button onclick="onscreen(4)" class="num">4</button>
+            <button onclick="onscreen(5)" class="num">5</button>
+            <button onclick=" onscreen(6)" class="num">6</button>
+            <button onclick="onscreen('-')" class="special">-</button>
+            <button onclick="onscreen(1)" class="num">1</button>
+            <button onclick="onscreen(2)" class="num">2</button>
+            <button onclick="onscreen(3)" class="num">3</button>
+            <button onclick="onscreen('+')" class="special">+</button>
+            <button onclick="backOneDigit()" class="num" ></button>
+            <button onclick="onscreen(0)" class="num">0</button>
+            <button onclick="onscreen('.')" class="num">.</button>
+            <button onclick="onscreen('=')" id="cal">=</button>
+        </div>
+    </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#on').click(function () {
+            $("#calculator").css({ "backgroundColor": "white", "color": "black" });
+            $("#container").css({ "backgroundColor": "white", "color": "black" });
+            $(".num").css({ "backgroundColor": "white","color":"black"});
+            $(".special").css({ "backgroundColor": "white" });
+            $("#off").show();
+            $("#on").hide();
+
+        });
+    });
+    $(document).ready(function () {
+        $('#off').click(function () {
+            $("#calculator").css({ "backgroundColor": "black" });
+            $("#container").css({ "backgroundColor": "black" });
+            $(".num").css({ "backgroundColor": "black","color":"white" });
+            $(".special").css({ "backgroundColor": "black" });
+            $("#off").hide();
+            $("#on").show();
+
+        });
+    });
+    function backOneDigit() {
+        $screenVAl = $("#screen").val();
+        $length = $screenVAl.length;
+
+        $("#screen").val($screenVAl.slice(0, ($length - 1)));
+        console.log($screenVAl.length)
+
+    }
+    $("#clear").click(function () {
+        $("#screen").val("");
+        console.log("clearing..");
+    });
+
+
+    function onscreen(data) {
+        if (data != '=') {
+            $prv_Val = $("#screen").val();
+            $("#screen").val($prv_Val + data);
+        }
+
+        else if (data == '=') {
+            $prv_Val = $("#screen").val();
+            $("#screen").val(eval($prv_Val));
+        }
+        else
+            $("#screen").val("SYSTEM ERROR");
+
+    }
+
+</script>
+
+</html>
