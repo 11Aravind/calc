@@ -80,6 +80,7 @@ button {
     right: 0;
     color: orangered;
 }
-/* {
-    color: orange;
-} */
+.exp{
+    vertical-align: super;
+    font-size: smaller;
+}

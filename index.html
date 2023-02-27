@@ -41,7 +41,7 @@
             <button onclick="onscreen(2)" class="num">2</button>
             <button onclick="onscreen(3)" class="num">3</button>
             <button onclick="onscreen('+')" class="special">+</button>
-            <button onclick="backOneDigit()" class="num"></button>
+            <button  class="special" id="power">X<small class="exp">2</small></button>
             <button onclick="onscreen(0)" class="num">0</button>
             <button onclick="onscreen('.')" class="num">.</button>
             <button onclick="onscreen('=')" id="cal">=</button>
@@ -49,6 +49,11 @@
     </div>
 </body>
 <script>
+    $("#power").click(function(){
+        $val = $("#screen").val();
+        // Math.pow($val,2);
+        $("#screen").val( Math.pow($val,2));
+    });
     $(document).ready(function () {
     $('#on').click(function () {
         $("#calculator").css({ "backgroundColor": "white", "color": "black" });
