@@ -71,6 +71,15 @@ button {
     display: none;
 }
 .calcName{
-    width: 100%;
-    float: right;
+    margin-left: 205px;
+    margin-bottom: 12px;
 }
+.mode{
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: orangered;
+}
+/* {
+    color: orange;
+} */

@@ -6,18 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
+  
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="./assct/calculation.js">
+    <!-- <link rel="stylesheet" href="./assct/calculation.js"> -->
+    <link rel="stylesheet" href="./assct/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
     <!-- <button id="darkWhite">DW</button> -->
-    <div class="mode">
-        <i class="fa fa-toggle-on" id="on" aria-hidden="true"></i>
-        <i class="fa fa-toggle-off" id="off" aria-hidden="true"></i>MODE
-    </div>
+   
     <div id="container">
+        <div class="mode">
+            <i class="fa fa-toggle-on" id="on" aria-hidden="true"></i>
+            <i class="fa fa-toggle-off" id="off" aria-hidden="true"></i>MODE
+        </div>
         <div id="calculator">
             <h4 class="calcName special">AsCalc</h4>
             <input type="text" id="screen">
@@ -45,5 +48,57 @@
         </div>
     </div>
 </body>
+<script>
+    $(document).ready(function () {
+    $('#on').click(function () {
+        $("#calculator").css({ "backgroundColor": "white", "color": "black" });
+        $("#container").css({ "backgroundColor": "white", "color": "black" });
+        $(".num").css({ "backgroundColor": "white","color":"black"});
+        $(".special").css({ "backgroundColor": "white" });
+        $("#off").show();
+        $("#on").hide();
 
+    });
+});
+$(document).ready(function () {
+    $('#off').click(function () {
+        $("#calculator").css({ "backgroundColor": "black" });
+        $("#container").css({ "backgroundColor": "black" });
+        $(".num").css({ "backgroundColor": "black","color":"white" });
+        $(".special").css({ "backgroundColor": "black" });
+        $("#off").hide();
+        $("#on").show();
+
+    });
+});
+function backOneDigit() {
+    $screenVAl = $("#screen").val();
+    $length = $screenVAl.length;
+
+    $("#screen").val($screenVAl.slice(0, ($length - 1)));
+    console.log($screenVAl.length)
+
+}
+$("#clear").click(function () {
+    $("#screen").val("");
+    console.log("clearing..");
+});
+
+
+function onscreen(data) {
+    if (data != '=') {
+        $prv_Val = $("#screen").val();
+        $("#screen").val($prv_Val + data);
+    }
+
+    else if (data == '=') {
+        $prv_Val = $("#screen").val();
+        $("#screen").val(eval($prv_Val));
+    }
+    else
+        $("#screen").val("SYSTEM ERROR");
+
+}
+
+</script>
 </html>
